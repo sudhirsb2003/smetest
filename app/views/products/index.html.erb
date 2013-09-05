@@ -1,0 +1,29 @@
+<h4 style="float:right"><%= link_to 'New Product', new_product_path %></h4>
+<table id="products">
+<thead>
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th> show </th>
+    <th> edit </th>
+    <th> destroy</th>
+
+  </tr>
+</thead>
+<tbody>
+<% @products.each do |product| %>
+  <tr>
+    <td><%= product.id %></td>
+    <td><%= link_to product.name, product %></td>
+    <td><%= product.category.name %></td>
+    <td><%= link_to 'Show', product %></td>
+    <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+

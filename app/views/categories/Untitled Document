@@ -1,0 +1,10 @@
+
+
+<p>
+  <%= f.label :Title, "Product" %><br />
+  <%= f.text_field :name %><br />
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove product" %>
+</p>
+
+

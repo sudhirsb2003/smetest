@@ -1,0 +1,31 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :First_Name %><br />
+  <%= f.text_field :first_name  %></div>
+
+  <div><%= f.label :Last_Name %><br />
+  <%= f.text_field :last_name %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+  <br>
+  <p> Subscribe categories </p>
+  
+	<% Category.all.each do |subscribe| %>
+		<%= hidden_field_tag "subscribe[subscribe_ids][]" %>
+		<%= check_box_tag "subscribe[subscribe_ids][]", subscribe.id %> <%= subscribe.name %><br>
+	<% end %><br>
+  
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
