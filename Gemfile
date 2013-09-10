@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'pg'
+gem 'delayed_job_active_record'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -8,7 +10,6 @@ gem 'rails'
 gem 'sqlite3'
 gem 'devise'
 gem 'faker'
-gem "nested_form"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

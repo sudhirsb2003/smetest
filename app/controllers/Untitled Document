@@ -1,0 +1,9 @@
+class SubscriptionsController < ApplicationController
+
+  def update 
+   @param = params[:subscription][:category_ids] ||= []
+   @subscription = Subscription.find params[:id]
+   @subscription.update_attributes(params[:subscription])
+  end 
+ 
+end

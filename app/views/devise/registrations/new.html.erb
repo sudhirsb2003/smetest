@@ -1,5 +1,6 @@
 <h2>Sign up</h2>
-<%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<% resource.subscriptions.build if resource.subscriptions.empty? %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div><%= f.label :First_Name %><br />
@@ -18,14 +19,13 @@
   <%= f.password_field :password_confirmation %></div>
   <br>
 
-  <p> Subscribe categories </p>
-		<%= f.fields_for :subscriptions do |task_form| %>
-		  <% Category.all.each do |d| %>
-			<%= task_form.text_field :category_id %>
-			<%= task_form.link_to_remove "Remove this task" %>
-		<% end %>
-		<% end %>
-
+   <%= f.fields_for :subscriptions do |subscription| %>
+    <% Category.all.each do |category|%>  
+      <%= check_box_tag "user[subscriptions_attributes][#{category.id}][category_id]", 
+	    category.id, f.object.subscriptions.include?(category),
+	    id: "subscription_category_ids_#{category.id}", :checked => true, :style => 'visibility: hidden'  %> 
+      <% end %>
+   <% end %>		
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 

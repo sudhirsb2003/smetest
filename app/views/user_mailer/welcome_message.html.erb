@@ -1,0 +1,9 @@
+<b><%= @user.full_name %>,</b>
+<p>Thank you for Subscribing!</p>
+You have subscribed to follwing Categories :
+<ol>
+<% Subscription.find_all_by_user_id(@user.id).each do |c| %>
+  <li><%= c.category.name %></li>
+<% end %>
+</ol>
+<b><%= link_to 'Unsubscribe', edit_user_registration_path %></b>

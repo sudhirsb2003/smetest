@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /products
   # GET /products.json
   def index
@@ -44,6 +45,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        UserMailer.welcome_message(current_user).deliver if @product.subscribed?
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
