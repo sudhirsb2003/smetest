@@ -18,14 +18,14 @@
 
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
-
-	<%= f.fields_for :subscriptions do |subscription| %>
-			<% resource.subscriptions.all.each do |category|%>
-		     <%= check_box_tag "subscription[category_ids][]", category.id %> 
-		     <%= category.name %>
-		     <br>
-			<% end %>
-		<% end %>
+ 
+	<%= f.fields_for resource.subscriptions do |subscription| %>
+	  <% Category.all.each do |category|%>
+	    <%= check_box_tag "subscription[category_ids][]", category.id, :checked => :true %> 
+	    <%= category.name %>
+	    <br>
+	  <% end %><br>
+	<% end %>
 
 
 

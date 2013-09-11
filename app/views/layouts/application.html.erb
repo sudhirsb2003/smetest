@@ -12,8 +12,8 @@
  <div id="header">
   <div id = "authenticate" style ="float:right">
   <% if signed_in? %>
-    <strong><%= current_user.email %>.
-    <%= link_to "Log out", destroy_user_session_path, :method => :delete %></strong>
+    <i style ="text-transform:capitalize;"><%= current_user.email %> |
+    <%= link_to "Go Out", destroy_user_session_path, :method => :delete %></i>
   <% else %>
     <div id = "header-fixed" style="float:right"><strong>
     <%= link_to "Register", new_user_registration_path %> /

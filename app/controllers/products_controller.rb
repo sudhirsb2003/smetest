@@ -42,10 +42,12 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-
+    @sub = Subscription.find_all_by_category_id(params[:product][:category_id]) 
     respond_to do |format|
       if @product.save
-        UserMailer.welcome_message(current_user).deliver if @product.subscribed?
+	@sub.each do |s|
+	  UserMailer.welcome_message(s.user).deliver #if @sub
+	end  
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else

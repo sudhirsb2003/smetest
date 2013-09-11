@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name ,:subscriptions_attributes
   # attr_accessible :title, :body
 
-  has_many :subscriptions
-  #has_many :categories, through: :subscriptions
-  accepts_nested_attributes_for :subscriptions #, :reject_if => :all_blank
+  has_many :subscriptions, :dependent => :destroy
+  has_many :categories, through: :subscriptions
+  accepts_nested_attributes_for :subscriptions , :reject_if => :all_blank
   
   
   def full_name 
