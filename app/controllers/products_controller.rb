@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
     @category = Category.all
     if @category.empty?
      redirect_to new_category_path, :notice => "plese add some category"
-    else 
+    else
      @product = Product.new
     end
   end
@@ -42,19 +42,12 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-    @sub = Subscription.find_all_by_category_id(params[:product][:category_id]) 
-    respond_to do |format|
-      if @product.save
-	@sub.each do |s|
-	  UserMailer.welcome_message(s.user).deliver #if @sub
-	end  
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render json: @product, status: :created, location: @product }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+			if @product.save
+			    @product.send_email_to_user(params[:product][:category_id])
+					redirect_to products_path, :notice => "Thank you. Please Check your email for further steps."
+ 			else
+    			render action: "new"
+			end
   end
 
   # PUT /products/1
