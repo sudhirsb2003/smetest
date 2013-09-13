@@ -2,14 +2,15 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'pg'
-gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'delayed_job'
+gem 'delayed_job_active_record', :git => 'https://github.com/gaslight/delayed_job_active_record'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'devise'
+gem 'devise', '2.2.7'
 gem 'faker'
 # Gems used only for assets and not required
 # in production environments by default.

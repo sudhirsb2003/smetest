@@ -12,10 +12,15 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :dependent => :destroy
   has_many :categories, through: :subscriptions
   accepts_nested_attributes_for :subscriptions , :reject_if => :all_blank
-  
-  
-  def full_name 
+
+  after_update :set_susbcription_category
+
+  def set_susbcription_category
+
+  end
+
+  def full_name
    "#{self.first_name}" " " "#{self.last_name}"
   end
-  
+
 end

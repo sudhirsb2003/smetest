@@ -1,5 +1,5 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<% resource.subscriptions.build if resource.subscriptions.empty? %>
+<% resource.subscriptions.build if resource.subscriptions.empty? and params[:action] == 'new' %>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -21,7 +21,7 @@
 
 	<%= f.fields_for resource.subscriptions do |subscription| %>
 	  <% Category.all.each do |category|%>
-	    <%= check_box_tag "subscription[category_ids][]", category.id, :checked => :true %>
+	    <%= check_box_tag "user[subscriptions_attributes][#{category.id}][category_id]", category.id, :checked => :true %>
 	    <%= category.name %>
 	    <br>
 	  <% end %><br>
